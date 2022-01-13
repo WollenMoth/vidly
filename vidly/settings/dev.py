@@ -8,7 +8,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vidly',
-        'HOST': 'mysql',
+        'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': 'Alitheia2908'
     }
