@@ -11,4 +11,10 @@ class GenreViewSet(ModelViewSet):
 
 class MovieViewSet(ModelViewSet):
     queryset = Movie.objects.select_related('genre').all()
-    serializer_class = MovieSerializer
+
+    def get_serializer_class(self):
+        if self.request.method in ['POST', 'PUT', 'PATCH']:
+            MovieSerializer.Meta.depth = 0
+        else:
+            MovieSerializer.Meta.depth = 1
+        return MovieSerializer
