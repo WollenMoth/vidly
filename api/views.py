@@ -10,5 +10,5 @@ class GenreViewSet(ModelViewSet):
 
 
 class MovieViewSet(ModelViewSet):
-    queryset = Movie.objects.all()
+    queryset = Movie.objects.select_related('genre').all()
     serializer_class = MovieSerializer
