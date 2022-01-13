@@ -15,8 +15,8 @@
         <a href="{% url 'movies:detail' movie.id %}">{{ movie.title }}<a/>
       </td>
       <td>{{ movie.genre }}</td>
-      <td>{{ movie.number_in_stock }}</td>
-      <td>{{ movie.daily_rate }}</td>
+      <td>{{ movie.numberInStock }}</td>
+      <td>{{ movie.dailyRentalRate }}</td>
     </tr>
     {% endfor %}
   </tbody>
