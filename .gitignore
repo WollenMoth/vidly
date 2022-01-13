@@ -1,0 +1,6 @@
+*.log
+*.pyc
+*.pyc.*
+.DS_Store
+/media/
+/static/
