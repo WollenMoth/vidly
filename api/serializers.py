@@ -11,5 +11,5 @@ class GenreSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'numberInStock', 'dailyRentalRate', 'genre']
+        fields = ['id', 'title', 'numberInStock', 'dailyRentalRate', 'genre', 'liked']
         depth = 1

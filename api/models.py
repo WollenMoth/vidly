@@ -14,3 +14,4 @@ class Movie(models.Model):
     numberInStock = models.IntegerField()
     dailyRentalRate = models.FloatField()
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    liked = models.BooleanField(default=False)
