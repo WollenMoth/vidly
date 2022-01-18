@@ -51,6 +51,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
 ]
 
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r'^http://192\.168\.[0-1]\.[0-9]{1,3}:3000$'
+]
+
 ROOT_URLCONF = 'vidly.urls'
 
 TEMPLATES = [
