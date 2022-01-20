@@ -1,7 +1,9 @@
-import imp
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from .models import Genre, Movie
-from .serializers import GenreSerializer, MovieSerializer
+from .models import Genre, Movie, Profile
+from .serializers import GenreSerializer, MovieSerializer, ProfileSerializer
 
 
 class GenreViewSet(ModelViewSet):
@@ -18,3 +20,21 @@ class MovieViewSet(ModelViewSet):
         else:
             MovieSerializer.Meta.depth = 1
         return MovieSerializer
+
+
+class ProfileViewSet(ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    # permission_classes = [IsAdminUser]
+
+    @action(detail=False, methods=['GET', 'PUT'], permission_classes=[IsAuthenticated])
+    def me(self, request):
+        profile = Profile.objects.get(user_id=request.user.id)
+        if request.method == 'GET':
+            serializer = ProfileSerializer(profile)
+            return Response(serializer.data)
+        elif request.method == 'PUT':
+            serializer = ProfileSerializer(profile, data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data)
