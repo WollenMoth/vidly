@@ -2,6 +2,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from vidly.permissions import IsAdminOrReadOnly
 from .models import Genre, Movie, Profile
 from .serializers import GenreSerializer, MovieSerializer, ProfileSerializer
 
@@ -9,10 +10,12 @@ from .serializers import GenreSerializer, MovieSerializer, ProfileSerializer
 class GenreViewSet(ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class MovieViewSet(ModelViewSet):
     queryset = Movie.objects.select_related('genre').all()
+    permission_classes = [IsAdminOrReadOnly]
 
     def get_serializer_class(self):
         if self.request.method in ['POST', 'PUT', 'PATCH']:
