@@ -13,8 +13,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
     def get_token(self, user):
         refresh = RefreshToken.for_user(user)
 
-        refresh['username'] = user.username
-        refresh['email'] = user.email
+        addClaims(refresh, user)
 
         return {
             'refresh': str(refresh),
@@ -37,7 +36,13 @@ class TokenObtainPairSerializer(BaseTokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        token['username'] = user.username
-        token['email'] = user.email
+        addClaims(token, user)
 
         return token
+
+
+def addClaims(token, user):
+    token['username'] = user.username
+    token['email'] = user.email
+    token['is_staff'] = user.is_staff
+    return token
