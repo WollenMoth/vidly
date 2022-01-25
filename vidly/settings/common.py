@@ -49,12 +49,12 @@ MIDDLEWARE = [
 INTERNAL_IPS = ['127.0.0.1']
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
 ]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r'^http://192\.168\.[0-1]\.[0-9]{1,3}:3000$'
+    r'^http://192\.168\.[0-1]\.[0-9]{1,3}:8000$'
 ]
 
 ROOT_URLCONF = 'vidly.urls'
@@ -62,7 +62,7 @@ ROOT_URLCONF = 'vidly.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,6 +113,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static')
+]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
